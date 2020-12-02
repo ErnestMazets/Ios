@@ -3,14 +3,14 @@ import UIKit
 // MARK: - Task 1 - Classes + Initialization
 // 1. Создайте 3 любых класса и реализуйте в них инициализаторы разного типа
 class Human1 {
-var name: String
-var pashport: Int
-var age: Int
-
+    var name: String
+    var pashport: Int
+    var age: Int
+    
     init(name:String, pashport: Int, age: Int) {
-self.name = name
-self.pashport = pashport
-self.age = age
+        self.name = name
+        self.pashport = pashport
+        self.age = age
         
     }
 }
@@ -27,12 +27,12 @@ class fastFood {
     var type: tipeOfRestourant
     var eat: String
     var human: tipeHumans
-
-init() {
-    self.eat = "Hamburger"
-    self.type = .McDonalds
-    self.human = .people
     
+    init() {
+        self.eat = "Hamburger"
+        self.type = .McDonalds
+        self.human = .people
+        
     }
 }
 //init(type: tipeOfRestourant, eat: String, human: tipeHumans = .children) {
@@ -89,18 +89,18 @@ journal.append(student4)
 journal.sort{ $0.mark > $1.mark }
 journal.sort{ $0.surname < $1.surname }
 journal.enumerated().forEach {
-print("\($0 + 1) - \($1)")
+    print("\($0 + 1) - \($1)")
     
 }
 var newStudentJournal: [Student] = journal
 
 let student5: Student = Student(name: "Habib", surname: "NUrmof", dateBirdthday: "10.09.1999", mark: 5.5)
 newStudentJournal.enumerated().forEach{
- 
-print("\($0 + 1) - \($1.name) \($1.surname) \($1.dateBirdthday) \($1.mark)")
+    
+    print("\($0 + 1) - \($1.name) \($1.surname) \($1.dateBirdthday) \($1.mark)")
 }
 journal.enumerated().forEach {
-print("\($0 + 1) - \($1)")
+    print("\($0 + 1) - \($1)")
 }
 //    init(surname: String, datebirthday: String, name: String, mark: Int) {
 //        self.surname = surname
@@ -108,7 +108,7 @@ print("\($0 + 1) - \($1)")
 //        self.dateBirdthday = dateBirdthday
 //        self.mark = mark
 
-    
+
 
 
 
@@ -140,7 +140,7 @@ class Students {
     var surname: String
     var year: Int
     var mark: Double
-
+    
     init(surname: String, year: Int, name: String, mark: Double) {
         self.surname = surname
         self.year = year
@@ -178,7 +178,7 @@ var newJournal1:[Students] = journal1
 // 1 — вычисляющее его возраст
 // 2 — вычисляющее, сколько всего лет он учился (студент учился в школе с 6 лет, если ему меньше 6 лет — возвращать 0)
 
-//не понял как мне записать условие для второго пункта, куда и где
+
 struct dateOfBirthaday {
     var day: Int
     var month: Int
@@ -186,35 +186,22 @@ struct dateOfBirthaday {
     
 }
 class Studentss {
-    var birthday: dateOfBirthaday = dateOfBirthaday(day: 10, month: 09, year: 2010)
-    
-    
-    var age: Int{
-        get {
-            
-            //                if self.age > 6 {
-            //                    print("\(age) лет")
-            //                } else {
-            //                    print("0")
-            //                }
-            return 2020 - birthday.year
-        }
-        
+    var birthday: dateOfBirthaday = dateOfBirthaday(day: 10, month: 09, year: 2009)
+    var age: Int {
+        2020 - birthday.year
     }
-    var howYearHeStudy: Int{
-        get {
-            return age - 6
-        }
+    
+    var howYearHeStudy: Int {
+        return self.age >= 6 ?
+            self.age - 6 : 0
     }
+    
 }
 
 let studentAge = Studentss()
-
 studentAge.age
-if studentAge.howYearHeStudy < 6{
-    print("0")
-}
 print(studentAge.age)
+print(studentAge.howYearHeStudy)
 
 //let todaydate = dateOfBirthaday(day: 22, month: 11, year: 2020)
 //let studentSasha = dateOfBirthaday(day: 10, month: 09, year: 1994)
@@ -230,7 +217,7 @@ print(studentAge.age)
 //}
 
 
-    
+
 
 
 // MARK: - Task 5 - Properties
@@ -241,28 +228,89 @@ print(studentAge.age)
 // - минимально возможный рост и вес
 // - создайте свойство, которое будет содержать количество созданных объектов этого класса
 class Human {
-    var name: String
-    var age: Int
-    var height: Double
-    var weight: Double
-    var nationality: String
-    
-    init(name: String, age: Int, height: Double, weight: Double, nationality: String) {
-        self.name = name
-        self.age = age
-        self.height = height
-        self.weight = weight
-        self.nationality = nationality
-        
-        
+    private var _name: String
+    var name: String {
+        get {
+            return self._name
+        }
+        set {
+            newValue.count > 0 && newValue.count < 20 ? self._name = newValue : print("не првильное количество символов")
+        }
+    }
+    private var _age: Int
+    var age: Int {
+        get {
+            return self._age
+        }
+        set {
+            newValue > 0 && newValue < 100 ? self._age = newValue : print("не правельный возраст")
+        }
+    }
+    private var _height: Double
+    var height: Double {
+        get {
+            return self._height
+        }
+        set {
+            newValue > 0 && newValue < 235 ? self._height = newValue : print("слишком большой рост")
+        }
+    }
+    private var _weight: Double
+    var weight: Double {
+        get {
+            return self._weight
+        }
+        set {
+            newValue > 0 && newValue < 250 ? self._weight = newValue : print("слишком большой вес")
+        }
+    }
+    init(_name: String, _age: Int, _height: Double, _weight: Double) {
+        self._age = _age
+        self._name = _name
+        self._height = _height
+        self._weight = _weight
     }
 }
-let human1: Human = Human(name: "Sasha", age: 35, height: 175, weight: 75.3, nationality: "Belarus")
-let human2: Human = Human(name: "Masha", age: 33, height: 164, weight: 59.8, nationality: "China")
+
+
+let human12 = Human(_name: "Ekatsiaryna", _age: 250, _height: 164.4, _weight: 270)
+
+print(human12.age)
+//human12.age = 250
+//print(human12.age)
+//human12.name = "Ekatsiaryna"
+//print(human12.name)
+//human12.height = 164.4
+//print(human12.height)
+//human12.weight = 270
+//print(human12.weight)
 
 
 
-   
+//    var nationality: String
+
+//    init(name: String, height: Double, weight: Double, nationality: String) {
+//        self.name = name
+//
+//        self.height = height
+//        self.weight = weight
+//        self.nationality = nationality
+
+
+
+
+
+//let human1: Human = Human(name: "Sasha", _age: 35, height: 175, weight: 75.3, nationality: "Belarus")
+//let human2: Human = Human(name: "Masha", age: 33, height: 164, weight: 59.8, nationality: "China")
+//
+//var people: [Human] = []
+//
+//people.append(human1)
+//people.append(human2)
+//
+//
+//let minAge = people.max { $0.age > $1.age }
+//minAge?.age
 
 // MARK: - Task 6 - Inheritance
 // 1. Создайте класс Кот
@@ -274,24 +322,46 @@ let human2: Human = Human(name: "Masha", age: 33, height: 164, weight: 59.8, nat
 // 7. Реализуйте конструктор, который в качестве аргумента принимает имя животного и устанавливает его в переменную с соответствующим уровнем доступа, который не позволяет переопределить её в дочерних классах
 
 class Cat {
-    var name: String
-    var age1: Int
+    var male: String
+    var age1: Double
     var color: String
-    private var voice: String = "MIAUUUUUU"
+    public private(set) var voice: String = "MIAUUUUUU"
     
-    init(name: String, age1: Int, color: String) {
-        self.name = name
+    private var _name: String = ""
+    var name: String {
+        get {
+            return self._name
+        }
+        set{
+            self._name = newValue
+        }
+    }
+    
+    init(male: String, age1: Double, color: String) {
+        self.male = male
         self.age1 = age1
         self.color = color
+        
     }
-
+    
 }
 class RedHeadCat: Cat {
     
 }
 class BlackCat: Cat {
-    var male: String = "Ж"
+    
 }
+let firstCat = RedHeadCat(male: "M", age1: 1.5, color: "Рыжий")    //name: "Рыжик"
+let secondCat = BlackCat(male: "Ж", age1: 2.3, color: "Черный")     // name: "Чернуха"
+firstCat.name = "Рыжик"
+secondCat.name = "Чернуха"
+print(firstCat.name)
+print(secondCat.name)
+firstCat
+print("Имя: \(firstCat.name), Пол: \(firstCat.male), Лет: \(firstCat.age1), Цвет: \(firstCat.color), Говорит: \(firstCat.voice)")
+// 7 пункт не понимаю((((((((
+//var nameOfCat = RedHeadCat(name: "asdfgf")
+
 
 // MARK: - Task 7 - Overriding
 // 1. Создайте класс Геометрическая фигура и реализуйте в нем метод подсчета площади фигуры
@@ -303,10 +373,131 @@ class BlackCat: Cat {
 // 7. Определите свойство цвет для каждой фигуры
 // 8. Если фигуры - Круг, Треугольник или Ромб - задайте им красный цвет
 // 9. Если фигуры - Квадрат или Трапеция - задайте им зеленый цвет
+class Geometria {
+    enum Color: String {
+        case red
+        case green
+    }
+    var description: String
+    var color: Color
+    var name: String
+    init(description: String, color: Color, name: String) {
+        self.description = description
+        self.color = color
+        self.name = name
+    }
+    
+    func square() -> Double {
+        return 0.0
+    }
+}
+
+class Round: Geometria {
+    var side: Double
+    init(side: Double) {
+        self.side = side
+        super.init(description: "Фигура без углов", color: .red , name: "Круг")
+        self.name = name
+        self.description = description
+        self.color = color
+    }
+    override func square() -> Double {
+        return self.side * self.side * 3.14
+    }
+}
+
+var squareRound = Round(side: 8)
+squareRound.square()
+
+class Squaree: Geometria {
+    var side: Double
+    
+    init(side: Double) {
+        self.side = side
+        super.init(description: "Все углы и стороны равны", color: .green , name: "Квадрат")
+        self.name = name
+        self.description = description
+        self.color = color
+    }
+    override func square() -> Double {
+        return self.side * self.side
+    }
+}
+var ssquare = Squaree(side: 4)
+ssquare.square()
+
+class Triangle: Geometria {
+    var side: Double
+    var side2: Double
+    init(side: Double, side2: Double) {
+        self.side = side
+        self.side2 = side2
+        super.init(description: "Фигура у которой будет всегда 2 острых угла ", color: .green , name: "Треугольник")
+        self.name = name
+        self.description = description
+        self.color = color
+    }
+    override func square() -> Double {
+        return self.side * self.side2 / 2
+    }
+}
+var squareTriangle = Triangle(side: 5, side2: 8)
+squareTriangle.square()
+
+//func SquareTriangle() -> Int {
+//    return self * self / 2
+//}
+
+class Trapeziod: Geometria {
+    var side: Double
+    var side2: Double
+    var hieght: Double
+    init(side: Double, side2: Double, hieght: Double) {
+        self.side = side
+        self.side2 = side2
+        self.hieght = hieght
+        super.init(description: "Четырехугольник у которого две стороны параллельны, а две не параллельны", color: .red , name: "Трапеция")
+        self.name = name
+        self.description = description
+        self.color = color
+        
+    }
+    override func square() -> Double {
+        return ((self.side + self.side2) / 2) * self.hieght
+    }
+}
+var squareTrapeziod = Trapeziod(side: 5, side2: 22.4, hieght: 21.8)
+squareTrapeziod.square()
+//func SquareTrapezoid(A: Double, B: Double, H: Double) -> Double {
+//    return (A + B) / 2 * H
 
 
+class Rhombus: Geometria {
+    var side: Double
+    var hieght: Double
+    init(side: Double, hieght: Double) {
+        self.side = side
+        self.hieght = hieght
+        super.init(description: "У Ромба противоположные стороны равны и попарно параллельны", color: .green , name: "Ромб")
+        self.name = name
+        self.description = description
+        self.color = color
+    }
+    override func square() -> Double {
+        return self.side * self.hieght
+    }
+}
+var squareRhombus = Rhombus(side: 2, hieght: 8.1)
+squareRhombus.square()
+print(squareRhombus.description)
+print(squareTrapeziod.description)
+print(squareTriangle.description)
+print(squareRound.description)
+print(ssquare.description)
+print(Geometria.Color.red)
 
-
+//func SquareRhombus(A: Double, B: Double) -> Double {
+//    return A * B
 
 
 // MARK: - Task 8 - Extensions
